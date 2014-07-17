@@ -1,0 +1,21 @@
+{
+    "environmentSettings": {
+        "webSite": {
+            "name": "nclass2",
+            "location": "East US"
+        },
+        "databases": [
+            {
+                "connectionStringName": "DefaultConnection",
+                "databaseName": "nclass2_db",
+                "serverName": "",
+                "user": "db1lt",
+                "password": "",
+                "edition": "",
+                "size": "",
+                "collation": "",
+                "location": "East US"
+            }
+        ]
+    }
+}
