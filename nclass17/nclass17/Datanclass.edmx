@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Namespace="Datanclass.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="DatanclassTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Datanclass" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="DatanclassContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Customers" EntityType="Datanclass.Customer" />
+          <EntitySet Name="Parts" EntityType="Datanclass.Parts" />
+          <EntitySet Name="Orders" EntityType="Datanclass.Order" />
+          <AssociationSet Name="PartsOrder" Association="Datanclass.PartsOrder">
+            <End Role="Parts" EntitySet="Parts" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="OrderCustomer" Association="Datanclass.OrderCustomer">
+            <End Role="Order" EntitySet="Orders" />
+            <End Role="Customer" EntitySet="Customers" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerID" />
+          </Key>
+          <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerName" Type="String" Nullable="false" />
+          <Property Name="CusomerAddress" Type="String" Nullable="false" />
+          <Property Name="CustomerPhone" Type="String" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Datanclass.OrderCustomer" FromRole="Customer" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Parts">
+          <Key>
+            <PropertyRef Name="PartID" />
+          </Key>
+          <Property Name="PartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PartName" Type="String" Nullable="false" />
+          <Property Name="PartNumber" Type="String" Nullable="false" />
+          <Property Name="PartDescription" Type="String" Nullable="false" />
+          <Property Name="PartPrice" Type="String" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Datanclass.PartsOrder" FromRole="Parts" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderInfo" Type="String" Nullable="false" />
+          <Property Name="OrderNumber" Type="String" Nullable="false" />
+          <Property Name="OrderDate" Type="String" Nullable="false" />
+          <Property Name="OrderPrice" Type="String" Nullable="false" />
+          <Property Name="OrderHistory" Type="String" Nullable="false" />
+          <NavigationProperty Name="Parts" Relationship="Datanclass.PartsOrder" FromRole="Order" ToRole="Parts" />
+          <NavigationProperty Name="Customer" Relationship="Datanclass.OrderCustomer" FromRole="Order" ToRole="Customer" />
+          <Property Name="CustomerCustomerID" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="PartsOrder">
+          <End Type="Datanclass.Parts" Role="Parts" Multiplicity="*" />
+          <End Type="Datanclass.Order" Role="Order" Multiplicity="*" />
+        </Association>
+        <Association Name="OrderCustomer">
+          <End Type="Datanclass.Order" Role="Order" Multiplicity="*" />
+          <End Type="Datanclass.Customer" Role="Customer" Multiplicity="1" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerID" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="CustomerCustomerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="Datanclass" />
+        <Alias Key="Target" Value="Datanclass.Store" />
+        <EntityContainerMapping CdmEntityContainer="DatanclassContainer" StorageEntityContainer="DatanclassTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
