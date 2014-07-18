@@ -15,7 +15,7 @@ namespace nclassthurs.Models
         public decimal Price { get; set; }
         public string Items { get; set; }
 
-        public virtual ICollection<Customer> Customers { get; set; }
+        public virtual Customer Customer { get; set; }
         public virtual ICollection<Part> Parts { get; set; }
         
     }

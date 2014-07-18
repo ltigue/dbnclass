@@ -50,6 +50,6 @@ C:\Users\Grand\Documents\GitHub\dbnclass\nclassthurs\nclassthurs\bin\Microsoft.O
 C:\Users\Grand\Documents\GitHub\dbnclass\nclassthurs\nclassthurs\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\Grand\Documents\GitHub\dbnclass\nclassthurs\nclassthurs\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\Grand\Documents\GitHub\dbnclass\nclassthurs\nclassthurs\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\Grand\Documents\GitHub\dbnclass\nclassthurs\nclassthurs\obj\Debug\nclassthurs.csprojResolveAssemblyReference.cache
 C:\Users\Grand\Documents\GitHub\dbnclass\nclassthurs\nclassthurs\obj\Debug\nclassthurs.dll
 C:\Users\Grand\Documents\GitHub\dbnclass\nclassthurs\nclassthurs\obj\Debug\nclassthurs.pdb
+C:\Users\Grand\Documents\GitHub\dbnclass\nclassthurs\nclassthurs\obj\Debug\nclassthurs.csprojResolveAssemblyReference.cache
