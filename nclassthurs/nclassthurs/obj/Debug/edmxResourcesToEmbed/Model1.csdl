@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Customers" EntityType="Model1.Customer" />
+    <EntitySet Name="Orders" EntityType="Model1.Order" />
+    <EntitySet Name="Parts" EntityType="Model1.Part" />
+    <AssociationSet Name="CustomerOrder" Association="Model1.CustomerOrder">
+      <End Role="Customer" EntitySet="Customers" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="OrderPart" Association="Model1.OrderPart">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="Part" EntitySet="Parts" />
+    </AssociationSet>
+    <AssociationSet Name="PartCustomer" Association="Model1.PartCustomer">
+      <End Role="Part" EntitySet="Parts" />
+      <End Role="Customer" EntitySet="Customers" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustName" Type="String" Nullable="false" />
+    <Property Name="CustAddress" Type="String" Nullable="false" />
+    <Property Name="CustPhone" Type="String" Nullable="false" />
+    <NavigationProperty Name="Orders" Relationship="Model1.CustomerOrder" FromRole="Customer" ToRole="Order" />
+    <NavigationProperty Name="Parts" Relationship="Model1.PartCustomer" FromRole="Customer" ToRole="Part" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="OrderID" />
+    </Key>
+    <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OrderInfo" Type="String" Nullable="false" />
+    <Property Name="OrderTotal" Type="String" Nullable="false" />
+    <Property Name="OrderPrice" Type="String" Nullable="false" />
+    <Property Name="OrderHistory" Type="String" Nullable="false" />
+    <NavigationProperty Name="Customer" Relationship="Model1.CustomerOrder" FromRole="Order" ToRole="Customer" />
+    <Property Name="CustomerCustomerID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Parts" Relationship="Model1.OrderPart" FromRole="Order" ToRole="Part" />
+  </EntityType>
+  <EntityType Name="Part">
+    <Key>
+      <PropertyRef Name="PartID" />
+    </Key>
+    <Property Name="PartID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PartNumber" Type="String" Nullable="false" />
+    <Property Name="PartType" Type="String" Nullable="false" />
+    <Property Name="Property1" Type="String" Nullable="false" />
+    <NavigationProperty Name="Orders" Relationship="Model1.OrderPart" FromRole="Part" ToRole="Order" />
+    <NavigationProperty Name="Customers" Relationship="Model1.PartCustomer" FromRole="Part" ToRole="Customer" />
+  </EntityType>
+  <Association Name="CustomerOrder">
+    <End Type="Model1.Customer" Role="Customer" Multiplicity="1" />
+    <End Type="Model1.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Customer">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="CustomerCustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="OrderPart">
+    <End Type="Model1.Order" Role="Order" Multiplicity="*" />
+    <End Type="Model1.Part" Role="Part" Multiplicity="*" />
+  </Association>
+  <Association Name="PartCustomer">
+    <End Type="Model1.Part" Role="Part" Multiplicity="*" />
+    <End Type="Model1.Customer" Role="Customer" Multiplicity="*" />
+  </Association>
+</Schema>
